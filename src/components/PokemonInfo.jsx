@@ -34,7 +34,7 @@ export default function PokemonInfo({value}){
             <img src='poke_close'/>
             {/* <img className='test' src={pokeInfo.sprites?.front_default} /> */}
             <button onClick={()=> console.log(pokeInfo)}> 
-                Show {value} Info In The Console :D 
+                Show {value} Info In The Console :DD
             </button>
         </section>
     </>
