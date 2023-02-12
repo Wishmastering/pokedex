@@ -8,6 +8,7 @@ import { BrowserRouter,
 
 import Landing from './page/Landing';
 import Pokedex from './page/Pokedex';
+import NotFound from './page/NotFound';
 
 
 
@@ -18,6 +19,7 @@ function Layout() {
       <Routes>
         <Route element={<Landing/>} path="/" />
         <Route element={<Pokedex/>} path="/pokedex" />
+        <Route element={<NotFound/>} path="/*" />
       </Routes>
     </BrowserRouter>
   );

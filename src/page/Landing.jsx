@@ -14,6 +14,7 @@ export default function Landing(){
   .then(function (response) {
     // handle success
     setInfo(response.data.results);
+    console.log(info)
   })
   .catch(function (error) {
     // handle error
@@ -35,13 +36,11 @@ useEffect(()=>{
             <h1> Landing Page!</h1>
             <button onClick={()=> showPokemon()}> Check The Available Pokemons!</button>
             { show ? 
-            <ul>
-                {info.map((item,index) =>
-                <div key={index}>
-                    <PokemonInfo value={item.name}/>
-                </div>)
-                }
-            </ul> : ""}
+                <div className='d-flex'>
+                    {/* <span> FLECHA IZQUIERDA -></span> */}
+                    <PokemonInfo value={info[0].name} />
+                    {/* <span> FLECHA DERECHA -></span> */}
+                </div>: ""}
         </div>
     </>
 }

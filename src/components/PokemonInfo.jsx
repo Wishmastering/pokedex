@@ -1,5 +1,6 @@
 import '../styles.css'
 import poke_close from "../images/poke_close.png"
+import poke_open from "../images/poke_open.png"
 import axios from "axios";
 import { useState, useEffect } from "react";
 
@@ -22,6 +23,32 @@ export default function PokemonInfo({value}){
         });
     }
 
+    function pokemonPopUp(){
+            let pokeShow = document.getElementById(value)
+            
+            pokeShow.src = poke_open
+            
+            pokeShow.width = 300
+            // pokeShow.classList.add = "expand-pokemon"
+            function onAniEnd(){
+            //  Aca fue necesario optional chainning PORQUE sino se quiebra 
+            pokeShow.src = pokeInfo.sprites?.front_default
+            setTimeout(()=>{
+                pokeShow.classList.remove("test")
+            }, 100)
+            }
+            pokeShow.addEventListener('transitionend', onAniEnd);
+
+    }
+
+    
+
+    function pokemonOff(){
+        let pokeOff = document.getElementById(value)
+        pokeOff.src = poke_close
+        pokeOff.classList.add("test")
+    }
+
     useEffect(()=>{
         getPokeInfo()
     }, [])
@@ -31,8 +58,12 @@ export default function PokemonInfo({value}){
             <li>
                 <p>{value}</p>
             </li>
-            <img src='poke_close'/>
-            {/* <img className='test' src={pokeInfo.sprites?.front_default} /> */}
+            
+            {/* Imagen del pokemon */}
+            <img id={value} className='test image' src={poke_close} 
+            style={{width:"40%", height:"auto"}}
+            onMouseEnter={()=>pokemonPopUp()} 
+            onMouseLeave={()=>pokemonOff()}/>
             <button onClick={()=> console.log(pokeInfo)}> 
                 Show {value} Info In The Console :DD
             </button>
