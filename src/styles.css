@@ -78,7 +78,7 @@ section {
     height: auto
 }
 
-.test:hover{
+.test{
     border-radius: 50%;
     transition: all 1.5s ease-in-out;
     box-shadow: 0px 0px 30px rgb(221, 9, 9);

@@ -23,35 +23,51 @@ export default function PokemonInfo({value}){
         });
     }
 
-    function pokemonPopUp(){
-            let pokeShow = document.getElementById(value)
-            
-            pokeShow.src = poke_open
-            
-            pokeShow.width = 300
-            // pokeShow.classList.add = "expand-pokemon"
-            function onAniEnd(){
-            //  Aca fue necesario optional chainning PORQUE sino se quiebra 
-            pokeShow.src = pokeInfo.sprites?.front_default
+    function showPokemon(){
+        let pokemon = document.getElementById(value);
+        pokemon.src = poke_open;
+        pokemon.classList.add("test")
+        
+        function onAniEnded(){
+            pokemon.src = pokeInfo.sprites?.front_default
             setTimeout(()=>{
-                pokeShow.classList.remove("test")
-            }, 100)
-            }
-            pokeShow.addEventListener('transitionend', onAniEnd);
+                pokemon.classList.remove("test")
+            }, 150)
+        }
+        pokemon.addEventListener('transitionend', onAniEnded);
 
     }
 
-    
+    // ESTE CODIGO ERA PARA EL HOVER en MOUSEENTER Y MOUSELEAVE
 
-    function pokemonOff(){
-        let pokeOff = document.getElementById(value)
-        pokeOff.src = poke_close
-        pokeOff.classList.add("test")
-    }
+//     function pokemonPopUp(){
+//         let pokeShow = document.getElementById(value)
+        
+//         pokeShow.src = poke_open
+        
+//         pokeShow.width = 300
+//         // pokeShow.classList.add = "expand-pokemon"
+//         function onAniEnd(){
+//         //  Aca fue necesario optional chainning PORQUE sino se quiebra 
+//         pokeShow.src = pokeInfo.sprites?.front_default
+//         setTimeout(()=>{
+//             pokeShow.classList.remove("test")
+//         }, 100)
+//         }
+//         pokeShow.addEventListener('transitionend', onAniEnd);
+
+// }
+
+
+    // function pokemonOff(){
+    //     let pokeOff = document.getElementById(value)
+    //     pokeOff.src = poke_close
+    //     pokeOff.classList.add("test")
+    // }
 
     useEffect(()=>{
         getPokeInfo()
-    }, [])
+    }, [value])
 
     return<>
         <section>
@@ -60,12 +76,17 @@ export default function PokemonInfo({value}){
             </li>
             
             {/* Imagen del pokemon */}
-            <img id={value} className='test image' src={poke_close} 
+            <img id={value} className='image' src={poke_close} 
             style={{width:"40%", height:"auto"}}
-            onMouseEnter={()=>pokemonPopUp()} 
-            onMouseLeave={()=>pokemonOff()}/>
-            <button onClick={()=> console.log(pokeInfo)}> 
-                Show {value} Info In The Console :DD
+            onFocus={()=>console.log("Hola HHHH")}
+            // === === === === === === === === === === === ===
+            // Estas eran para el HOVER EFFECT para practicar
+            // === === === === === === === === === === === ===
+            // onMouseEnter={()=>pokemonPopUp()} 
+            // onMouseLeave={()=>pokemonOff()}
+            />
+            <button onClick={()=> showPokemon()}> 
+                Click Here to see {value} 
             </button>
         </section>
     </>

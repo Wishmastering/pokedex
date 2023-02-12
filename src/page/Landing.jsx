@@ -8,6 +8,7 @@ export default function Landing(){
 
  let [info, setInfo] = useState([])
  let [show, setShow] = useState(false)
+ let [counter, setCounter] = useState(0)
 
   function getPokemon(){
     axios.get('https://pokeapi.co/api/v2/pokemon')
@@ -26,6 +27,11 @@ function showPokemon(){
     show ? setShow(false) : setShow(true)
 }
 
+function carrousel(){
+   setCounter(counter+1)
+}
+
+
 useEffect(()=>{
     getPokemon() 
 },[])
@@ -38,8 +44,9 @@ useEffect(()=>{
             { show ? 
                 <div className='d-flex'>
                     {/* <span> FLECHA IZQUIERDA -></span> */}
-                    <PokemonInfo value={info[0].name} />
-                    {/* <span> FLECHA DERECHA -></span> */}
+                    <PokemonInfo value={info[counter].name} />
+                    <span onClick={()=>carrousel()}> FLECHA DERECHA -></span>
+
                 </div>: ""}
         </div>
     </>
