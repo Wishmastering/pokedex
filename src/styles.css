@@ -16,60 +16,18 @@ div {
     /* background-color: aquamarine; */
 }
 
-ul{
-    display: grid;
-    grid-template-columns: 1fr;
-    justify-content: center;
-    /* flex-direction: column; */
-}
-
-ul div{
-    /* background-color: aqua; */
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border: 3px solid beige;
-    margin: 10px;
-}
-
-div li {
-    border: 1px solid black;
-    border-radius: 20%;
-    color: rgb(0, 52, 97);
-    list-style-type: none;
-    /* background-color: aquamarine; */
-    /* margin: 3px; */
-    position: relative;
-    max-width: fit-content;
-    margin: 0 auto;
-    padding: 1px 8px;
-}
-
-div li::before{
-    content: "";
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    border: 1px solid yellow ;
-    /* color: black;
-    background-color: none; */
-    left: 1px;
-    top: 50%;
-
-}
-
-.d-flex{
-    /* display: flex;
-    justify-content: center; */
-}
-
 /* Estilos componente "PokemonInfo" */
 
-section {
+/* section {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    width: 100%;
+} */
+
+section p {
+    margin: 10px;
 }
 
 .expand-pokemon{
@@ -78,7 +36,7 @@ section {
     height: auto
 }
 
-.test{
+.pokeball-animation{
     border-radius: 50%;
     transition: all 1.5s ease-in-out;
     box-shadow: 0px 0px 30px rgb(221, 9, 9);
@@ -86,17 +44,53 @@ section {
     background-color: white;
 }
 
-.image::before{
-    content: '';
-    width: 200px;
-    height: 200px;
-    background-color: black;
-    position: absolute;
-    top: 0px;
-    left: 0px;
+.image-wrapper{
+    position: relative;
 }
 
 
+.image-wrapper span:nth-child(1){
+    position: absolute;
+    top: 50%;
+    left: 15%;
+    border: 6px solid black ;
+    padding: 10px;
+    opacity: 0.5;
+    border-radius: 10%;
+    
+    /* Esto es para eliminar y dar ilusion de flecha */
+    border-top: none;
+    border-right: none;
+    
+    /* Y transform lo rota */
+    transform:rotateZ(45deg);
+    
+}
+
+
+.image-wrapper span:nth-child(3){
+    position: absolute;
+    top: 50%;
+    right: 15%;
+    border: 6px solid black ;
+    width: 20px;
+    height: 20px;
+    opacity: 0.5;
+    border-radius: 10%;
+    /* Esto es para eliminar y dar ilusion de flecha */
+    border-top: none;
+    border-right: none;
+    
+    /* Y transform lo rota */
+    transform:rotateZ(225deg)
+}
+
+.image-wrapper span:hover{
+    cursor: pointer;
+    scale: 1.8;
+    opacity: 1;
+    transition: all 1.5s;
+}
 
 /* @keyframes pokeballToPokemon{
     0% {opacity:1}

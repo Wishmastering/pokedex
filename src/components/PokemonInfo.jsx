@@ -2,9 +2,12 @@ import '../styles.css'
 import poke_close from "../images/poke_close.png"
 import poke_open from "../images/poke_open.png"
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import PokemonContext from '../page/Context';
 
 export default function PokemonInfo({value}){
+
+    const [store,actions] = useContext(PokemonContext)
 
     let [pokeInfo, setPokeInfo] = useState([])
     
@@ -26,17 +29,23 @@ export default function PokemonInfo({value}){
     function showPokemon(){
         let pokemon = document.getElementById(value);
         pokemon.src = poke_open;
-        pokemon.classList.add("test")
+        pokemon.classList.add("pokeball-animation")
         
         function onAniEnded(){
             pokemon.src = pokeInfo.sprites?.front_default
             setTimeout(()=>{
-                pokemon.classList.remove("test")
+                pokemon.classList.remove("pokeball-animation")
             }, 150)
         }
-        pokemon.addEventListener('transitionend', onAniEnded);
-
+        pokemon.addEventListener('transitionend', onAniEnded)
     }
+
+    function pokeballClose(){
+        let pokemonImage = document.getElementById(value);
+        pokemonImage.src = poke_close
+    }
+
+    // definir una funcion y llamar y colocarle imagen en el src: poke_close
 
     // ESTE CODIGO ERA PARA EL HOVER en MOUSEENTER Y MOUSELEAVE
 
@@ -66,25 +75,30 @@ export default function PokemonInfo({value}){
     // }
 
     useEffect(()=>{
-        getPokeInfo()
+        getPokeInfo();
+        pokeballClose();
     }, [value])
 
     return<>
         <section>
-            <li>
+            
                 <p>{value}</p>
-            </li>
+            
             
             {/* Imagen del pokemon */}
-            <img id={value} className='image' src={poke_close} 
-            style={{width:"40%", height:"auto"}}
-            onFocus={()=>console.log("Hola HHHH")}
-            // === === === === === === === === === === === ===
-            // Estas eran para el HOVER EFFECT para practicar
-            // === === === === === === === === === === === ===
-            // onMouseEnter={()=>pokemonPopUp()} 
-            // onMouseLeave={()=>pokemonOff()}
-            />
+            <div className='image-wrapper'>
+                <span onClick={()=> actions.setCounter()}></span>
+            
+                <img id={value} className='' src={poke_close} 
+                style={{width:"40%", height:"auto"}}
+                // === === === === === === === === === === === ===
+                // Estas eran para el HOVER EFFECT para practicar
+                // === === === === === === === === === === === ===
+                // onMouseEnter={()=>pokemonPopUp()} 
+                // onMouseLeave={()=>pokemonOff()}
+                />  
+                <span onClick={()=> actions.setCounter("derecha")}></span>
+            </div>
             <button onClick={()=> showPokemon()}> 
                 Click Here to see {value} 
             </button>
